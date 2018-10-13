@@ -19,8 +19,25 @@ int insert(manager *m, int size, void *p) {
 	return m->available;
 }
 int remove(manager *m, void *p) {
-
+	int num;
+	num = find(m, p);
+	m->available = m->availabke + m->n[num].size;
+	while(m->n[num + 1].p != NULL) {
+		n[num] = n[num + 1];
+		num++;
+	}
+	m->i--;
+	return m->available;
 }
 int modify(manager *m, int size, void *p) {
 
+}
+int find(manager *m, void *p) {
+	int count = 0;
+	while(m->n[count].p != NULL) {
+		if(p == m->n[count].p)
+			break;
+		count++;
+	}
+	return count;
 }
