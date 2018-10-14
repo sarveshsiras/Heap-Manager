@@ -1,8 +1,8 @@
 #include "manager.h"
-int manageit(manager *m) {
+void manageit(manager *m, int mem) {
 	int j;
 	m->currpos = 0;
-	m->available = 4096;
+	m->available = mem;
 	m->i = 0;
 	for(j = 0; j < SIZE; j++) {
 		m->n[j].p = NULL;
@@ -21,7 +21,7 @@ int insert(manager *m, int size, void *p) {
 int remove(manager *m, void *p) {
 	int num;
 	num = find(m, p);
-	m->available = m->availabke + m->n[num].size;
+	m->available = m->available + m->n[num].size;
 	while(m->n[num + 1].p != NULL) {
 		n[num] = n[num + 1];
 		num++;
@@ -30,7 +30,11 @@ int remove(manager *m, void *p) {
 	return m->available;
 }
 int modify(manager *m, int size, void *p) {
-
+	int num;
+	num = find(m, p);
+	m->available = m->available - m->n[num].size + size;
+	m->n[num].size = size;
+	return m->available;
 }
 int find(manager *m, void *p) {
 	int count = 0;

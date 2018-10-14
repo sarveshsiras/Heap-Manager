@@ -7,7 +7,7 @@ typedef struct manager {
 	node n[SIZE];	
 	int currpos, available, i;
 }manager;
-int manageit(manager *m);
+void manageit(manager *m, int mem);
 int insert(manager *m, int size, void *p);
 int remove(manager *m, void *p);
 int modify(manager *m, int size, void *p);	
