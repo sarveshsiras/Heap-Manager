@@ -1,4 +1,5 @@
 #include "manager.h"
+#include <limits.h>
 void manageit(manager *m, int mem) {
 	int j;
 	m->currpos = 0;
@@ -21,6 +22,8 @@ int insert(manager *m, int size, void *p) {
 int remove(manager *m, void *p) {
 	int num;
 	num = find(m, p);
+	if(num == INT_MIN)
+		return m->available;
 	m->available = m->available + m->n[num].size;
 	while(m->n[num + 1].p != NULL) {
 		n[num] = n[num + 1];
@@ -32,16 +35,22 @@ int remove(manager *m, void *p) {
 int modify(manager *m, int size, void *p) {
 	int num;
 	num = find(m, p);
+	if(num == INT_MIN)
+		return m->available;
 	m->available = m->available - m->n[num].size + size;
 	m->n[num].size = size;
 	return m->available;
 }
 int find(manager *m, void *p) {
-	int count = 0;
+	int count = 0, flag = 0;
 	while(m->n[count].p != NULL) {
-		if(p == m->n[count].p)
+		if(p == m->n[count].p) {
+			flag = 1;
 			break;
+		}
 		count++;
 	}
+	if(flag == 0)
+		return INT_MIN;
 	return count;
 }
