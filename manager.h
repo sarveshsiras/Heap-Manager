@@ -4,7 +4,7 @@ typedef struct node {
 	void *p;
 }node;
 typedef struct manager {
-	node n[SIZE];	
+	node u[SIZE], f[SIZE];	
 	int currpos, available, i;
 }manager;
 void manageit(manager *m, int mem);
