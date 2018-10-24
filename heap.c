@@ -17,7 +17,7 @@ void *smalloc(size_t size) {
 	}
 	p = sbrk(0);
 	pos = currposition(&m);
-	q = p[pos];
+	q = (void *)((char *)p + pos); 
 	mem = insert(&m, size, q);
 	return q;
 }
@@ -25,22 +25,29 @@ void *scalloc(size_t nmemb, size_t size) {
 	int j = 0; 
 	size_t totalsize = nmemb * size;
 	void *p;
+	char *c;
 	p = smalloc(totalsize);
-	/*while(j < totalsize) {
-		p[j] = 0;
+	c = p;
+	while(j < totalsize) {
+		c[j] = 0;
 		++j;
-	}*/
+	}
 	return p;
 }
 void *srealloc(void *ptr, size_t size) {
-	int avail;
-	void *p;
+	int avail, pos;
+	void *p, *q;
 	p = sbrk(0);
+	pos = currposition(&m);
+	q = (void *)((char *)p + pos); 
 	avail = modify(&m, size, p, ptr);
-	return ptr;
+	return q;
 }
 void sfree(void *ptr) {
 	int avail;
+	if(ptr == NULL) {
+		return;
+	}
 	avail = remov(&m, ptr);
 	if(avail == MEM) {
 		sbrk(0 - MEM);

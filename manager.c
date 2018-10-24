@@ -55,14 +55,11 @@ int remov(manager *m, void *p) {
 }
 int modify(manager *m, int size, void *p, void *ptr) {
 	int num;
-	num = find(m, ptr);
-	if(num == INT_MIN)
-		return m->available;
-	m->available = m->available + m->u[num].size - size;
-	m->u[num].size = size;
-	m->u[num].start = m->currpos;
-	m->u[num].size = size;       
-        m->u[num].p = p;
-        m->currpos = m->currpos + size;
+	num = remov(m, ptr);
+	if(num == m->available) {
+		//error condition
+		return INT_MIN;
+	}
+	num = insert(m, size, p);
 	return m->available;
 }
