@@ -18,6 +18,15 @@ void manageit(manager *m, int mem) {
 int currposition(manager *m) {
 	return m->currpos;
 }
+int sizeofptr(manager *m, void *p) {
+	int count;
+	size_t size;
+	count = find(m, p);
+	if(count == INT_MIN)
+		return m->available;
+	size = m->u[count].size;
+	return size;
+}
 int insert(manager *m, int size, void *p) {
 	m->u[m->i].start = m->currpos;
 	m->u[m->i].size = size;

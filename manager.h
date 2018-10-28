@@ -9,6 +9,7 @@ typedef struct manager {
 }manager;
 void manageit(manager *m, int mem);
 int currposition(manager *m);
+int sizeofptr(manager *m, void *p); 
 int insert(manager *m, int size, void *p);
 int remov(manager *m, void *p);
 int modify(manager *m, int size, void *p, void *ptr);	

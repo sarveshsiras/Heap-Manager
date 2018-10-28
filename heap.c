@@ -35,13 +35,24 @@ void *scalloc(size_t nmemb, size_t size) {
 	return p;
 }
 void *srealloc(void *ptr, size_t size) {
-	int avail, pos;
-	void *p, *q;
-	p = sbrk(0);
-	pos = currposition(&m);
-	q = (void *)((char *)p + pos); 
+	int j = 0, avail;
+	void *p;
+	char *c;
+	size_t currsize;
+	if(size == 0 && ptr != NULL) {
+		sfree(ptr);
+		return ptr;
+	}
+	
+	currsize = sizeofptr(&m, ptr);
+	p = smalloc(size);
+	c = p;
+	while(j < currsize) {
+		c[j] = (char *)ptr[j];			
+		j++;
+	} 
 	avail = modify(&m, size, p, ptr);
-	return q;
+	return p;
 }
 void sfree(void *ptr) {
 	int avail;
