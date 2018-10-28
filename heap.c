@@ -43,15 +43,17 @@ void *srealloc(void *ptr, size_t size) {
 		sfree(ptr);
 		return ptr;
 	}
-	
 	currsize = sizeofptr(&m, ptr);
 	p = smalloc(size);
 	c = p;
 	while(j < currsize) {
-		c[j] = (char *)ptr[j];			
+		c[j] = *((char *)ptr + j);			
 		j++;
 	} 
 	avail = modify(&m, size, p, ptr);
+	if(avail <= 0) {
+		
+	}
 	return p;
 }
 void sfree(void *ptr) {
