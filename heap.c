@@ -3,14 +3,16 @@
 #include <string.h>
 #include "heap.h"
 #include "manager.h"
-#define MEM 512
+#define MEM 1024
 manager m;
 int i = 0;
 size_t memalloc = 0;
 void *smalloc(size_t size) {
 	void *p, *q;
-	int mem, pos;
-	//size = (size - 1) / 4 * 4 + 4;
+	int pos;
+	if(size == 0)
+		return NULL;
+	size = (size - 1) / 4 * 4 + 4;
 	if(i == 0) {
 		manageit(&m, MEM);
 		p = sbrk(MEM);
@@ -32,7 +34,7 @@ void *smalloc(size_t size) {
 	p = sbrk(0);
 	pos = currposition(&m);
 	q = (void *)((char *)p + pos); 
-	mem = insert(&m, size, q);
+	insert(&m, size, q);
 	return q;
 }
 void *scalloc(size_t nmemb, size_t size) {
@@ -43,7 +45,6 @@ void *scalloc(size_t nmemb, size_t size) {
 	return p;
 }
 void *srealloc(void *ptr, size_t size) {
-	int avail;
 	void *p;
 	size_t currsize;
 	if(size == 0 && ptr != NULL) {
@@ -56,10 +57,7 @@ void *srealloc(void *ptr, size_t size) {
 		currsize = sizeofptr(&m, ptr);
 		p = smalloc(size);
 		memcpy(p, ptr, currsize);
-		avail = remov(&m, ptr);
-		if(avail <= 0) {
-		
-		}
+		remov(&m, ptr);
 	}
 	return p;
 }
@@ -69,7 +67,7 @@ void sfree(void *ptr) {
 		return;
 	}
 	avail = remov(&m, ptr);
-	if(avail == MEM) {
+	if(avail == memalloc) {
 		sbrk(0 - memalloc);
 		i = 0;
 	}
