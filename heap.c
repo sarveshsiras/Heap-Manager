@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "h2.h"
-#include "m2.h"
+#include "heap.h"
+#include "manager.h"
 #define MEM 1024
 manager m;
 int i = 0;

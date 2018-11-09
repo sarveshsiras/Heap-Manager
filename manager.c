@@ -1,4 +1,4 @@
-#include "m2.h"
+#include "manager.h"
 void manageit(manager *m, unsigned int mem) {
 	int a, b;
 	m->available[0] = mem;
