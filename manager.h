@@ -1,3 +1,5 @@
+/*This data structures is book keeping type of thing for managing and keeping record of pointer inuse and freed block.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 1000
@@ -11,8 +13,8 @@ typedef struct fnode {
 	void *p, *ref;
 }fnode;
 typedef struct manager {
-	node u[BLOCK][SIZE];
-	fnode f[SIZE];//u means under use and f means once freed and again used	
+	node u[BLOCK][SIZE];//u is a 2-D array for managing in use pointers wrt a particular allocated block.
+	fnode f[SIZE];//f is an array of freed memory wrt a particular block which can be used again.
 	int currpos[BLOCK], blkfreed, available[BLOCK], i[BLOCK], j, bi;
 }manager;
 void manageit(manager *m, unsigned int mem);
