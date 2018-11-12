@@ -8,7 +8,7 @@
 manager m; //declaring data structure
 int i = 0; //for initialization
 size_t memalloc = 0; //amount of memory allocated
-void *p; 
+void *p;
 /*when run first time it executes the condition of initialization
  *In further steps it checks for available size and allocates memory accordingly
 */

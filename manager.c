@@ -22,6 +22,10 @@ void manageit(manager *m, unsigned int mem) {
 		m->f[b].start = m->f[b].size = m->f[b].blkno = 0;
 	}
 }
+/*It checks if the record is full*/
+int mfull(manager *m, int a) {
+	return (m->bi < BLOCK && m->j < BLOCK && m->i[a] < SIZE);
+}
 /*It returns size of a specific pointer from the record if it exists*/
 int sizeofptr(manager *m, void *p) {
 	int x, y;
@@ -168,6 +172,10 @@ int currposition(manager *m, int blk) {
 */
 void* allocate(manager *m, int blk, size_t size) {
 	void *ptr;
+	if(!mfull(m, blk)) {
+		printf("No memory left\n");
+		exit(0);
+	}
 	if(blk < 0) {
 		blk = -blk;
 		ptr = fralloc(m, blk, size);

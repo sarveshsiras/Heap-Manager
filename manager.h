@@ -19,6 +19,7 @@ typedef struct manager {
 }manager;
 void manageit(manager *m, unsigned int mem);
 int currposition(manager *m, int blk);
+int mfull(manager *m, int a);
 int sizeofptr(manager *m, void *p); 
 void insert(manager *m, unsigned int size, void *tmp, void *p, int num);
 void find(manager *m, void *p, int *a, int *b); 
