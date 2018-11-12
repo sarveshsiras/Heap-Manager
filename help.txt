@@ -1,0 +1,15 @@
+Links:
+Understanding system memory management
+link:https://www.linuxjournal.com/article/6390
+https://en.wikipedia.org/wiki/C_dynamic_memory_allocation
+
+Understanding use of sbrk and brk
+link:https://notes.shichao.io/tlpi/ch7/
+link:https://stackoverflow.com/questions/6988487/what-does-the-brk-system-call-do
+
+Books
+for reference:Understanding and Using C Pointers O'Reilly
+
+People who helped me:
+Abhijit Sir: For doubts with data strucure and and segfaults
+Vinay kukreja : help with sbrk implementation
