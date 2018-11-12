@@ -128,7 +128,7 @@ void newbuddy(manager *m, void *p, size_t size, size_t tsize) {
 	if(size == 0) {
 		m->u[0][0].ref = p;
 		m->available[0] = tsize;
-		m->bi++;		
+		m->bi++;
 	}
 	else {
 		m->u[m->bi][0].ref = m->u[m->bi][0].p = p;
@@ -149,7 +149,7 @@ int buddyavail(manager *m, size_t size) {
 	if(m->j) {
 		for(a = 0; a < m->j; a++)
 			if(m->f[a].size >= size){
-				m->blkfreed = m->blkfreed - m->f[a].size;			
+				m->blkfreed = m->blkfreed - m->f[a].size;
 				return -a;
 			}
 	}
@@ -157,7 +157,6 @@ int buddyavail(manager *m, size_t size) {
 		for(a = 0; a < m->bi; a++)
 			if(m->available[a] >= size)
 				return a;
-
 	}
 	return 0;
 }

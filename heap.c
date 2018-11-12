@@ -68,18 +68,18 @@ void initialize() {
 	manageit(&m, MEM);
 	p = sbrk(0);
 	if(p == (void *) -1) {
-		fprintf(stderr,"Error no memory");		
+		fprintf(stderr,"Error no memory");
 		exit(0);
 	}
 	p = sbrk(MEM);
 	memalloc = MEM;
 	if(p == (void *) -1) {
-		fprintf(stderr,"Error no memory");		
+		fprintf(stderr,"Error no memory");
 		exit(0);
 	}
 	q = sbrk(0);
 	if(q == (void *) -1) {
-		fprintf(stderr,"Error no memory\n");		
+		fprintf(stderr,"Error no memory\n");
 		exit(0);
 	}
 	newbuddy(&m, p, 0, MEM);
@@ -107,17 +107,17 @@ void* assign(size_t size) {
 			multiple++;
 		p = sbrk(multiple * MEM);
 		if(p == (void *) -1) {
-			fprintf(stderr, "Error no memory\n");		
+			fprintf(stderr, "Error no memory\n");
 			exit(0);
 		}
 		tmp = sbrk(0);
 		if(tmp == (void *) -1) {
-			fprintf(stderr, "Error no memory\n");		
+			fprintf(stderr, "Error no memory\n");
 			exit(0);
 		}
 		memalloc = memalloc + multiple * MEM;
 		newbuddy(&m, p, size, multiple * MEM);
-		tmp = p;	
+		tmp = p;
 	}
 	return tmp;
 }

@@ -130,7 +130,7 @@ int main() {
 	matrix = (char ***)smalloc(x * sizeof(char **));
 	for(row = 0; row < x; row++) {
         	matrix[row] = (char **)smalloc(x * sizeof(char *));
-        	if(matrix[row] != NULL) 
+        	if(matrix[row] != NULL)
 			flag = 1;
 		else {
 			flag = 0;
@@ -142,7 +142,7 @@ int main() {
 	}
         if(flag) {
 		printf("Test for matrix of 1024*1024 was successful\n");
-		for (row = 0; row < x; row++) 
+		for(row = 0; row < x; row++)
 			sfree(matrix[row]);
 	}
 	else

@@ -20,9 +20,9 @@ typedef struct manager {
 void manageit(manager *m, unsigned int mem);
 int currposition(manager *m, int blk);
 int mfull(manager *m, int a);
-int sizeofptr(manager *m, void *p); 
+int sizeofptr(manager *m, void *p);
 void insert(manager *m, unsigned int size, void *tmp, void *p, int num);
-void find(manager *m, void *p, int *a, int *b); 
+void find(manager *m, void *p, int *a, int *b);
 void remov(manager *m, void *p);
 void finsert(manager *m, node u, int blk);
 void* fralloc(manager *m, unsigned int size, int a);
